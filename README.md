@@ -85,3 +85,33 @@ Report:
                 - jnb: 422.9ms (Johannesburg)
                 - nai: 525.9ms (Nairobi)
 ```
+
+
+### 5 ping test  Tokyo VS Hong Kong
+
+```
+[root@PTT_Server ~]# tailscale ping 172.18.176.54
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 741ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 405ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 397ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 412ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 427ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 401ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 394ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 398ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 400ms
+pong from tailscale-client-test (172.18.176.54) via DERP(tok) in 398ms
+
+[root@PTT_Server ~]# tailscale ping 172.18.176.54
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 54ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 71ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 66ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 68ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 66ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 61ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 74ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 62ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 59ms
+pong from tailscale-client-test (172.18.176.54) via DERP(iCd) in 75ms
+direct connection not established
+```
