@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM alpine:latest
 # docker run --rm -d -p 18443:443 -p 3478:3478/udp 2ebfcd77f938
 # Set working directory
 WORKDIR /app
@@ -12,17 +12,19 @@ ENV CHANGE_SOURCE=true
 ENV DERP_VERIFY_CLIENTS=false
 # ==========================
 
-# ARG to control source change
 ARG CHANGE_SOURCE=false
+RUN if [ ${CHANGE_SOURCE} = true ]; then \
+    # Change application source from dl-cdn.alpinelinux.org to aliyun source
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/' /etc/apk/repositories \
+;fi
 
-# Change application source if required (only for Ubuntu-based images)
-RUN if [ "$CHANGE_SOURCE" = "true" ]; then \
-    # Change application source from archive.ubuntu.com to mirrors.aliyun.com \
-    sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/' /etc/apt/sources.list; \
-    fi
+RUN apk update \
+    && apk upgrade \
+    && apk --update add logrotate \
+    && apk add --no-cache openssl \
+    && apk add --no-cache bash
 
-# Install dependencies
-RUN apt-get update && apt-get install -y bash openssl curl  && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl
 
 # Create /app directory and set permissions
 RUN mkdir -p /app 
@@ -32,7 +34,7 @@ COPY build_cert.sh /app/
 COPY ./derper /app/
 
 # Ensure the derper file has execute permissions
-RUN  chmod +x -R /app
+RUN  chmod +rx -R /app
 
 # Debugging: Check if the file exists and has execute permission
 RUN ls -l /app/
