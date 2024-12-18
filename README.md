@@ -7,8 +7,9 @@ docker build -t derper:least .
 
 ### 2 run docker
 
+> docker run   --name derper -p 18443:443 -p 3478:3478/udp {docker-id} 
 ```
-docker run --rm -d -p 18443:443 -p 3478:3478/udp {docker-id}
+docker run --rm -d --restart unless-stopped  --name derper -p 18443:443 -p 3478:3478/udp {docker-id}
 
 [root@PTT_Server ~]# docker ps
 CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                            NAMES

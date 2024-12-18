@@ -23,7 +23,7 @@ RUN if [ "$CHANGE_SOURCE" = "true" ]; then \
     fi
 
 # Install dependencies
-RUN apt-get update && apt-get install -y bash openssl curl  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y bash openssl curl gcc make && rm -rf /var/lib/apt/lists/*
 
 # Create /app directory and set permissions
 RUN mkdir -p /app 
