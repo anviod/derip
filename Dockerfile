@@ -14,16 +14,15 @@ ENV DERP_VERIFY_CLIENTS=false
 # ==========================
 
 # ARG to control source change
-ARG CHANGE_SOURCE=false
+ARG CHANGE_SOURCE=true
 
 # Change application source if required (only for Ubuntu-based images)
-RUN if [ "$CHANGE_SOURCE" = "true" ]; then \
+RUN if [ ${CHANGE_SOURCE} = true  ]; then \
     # Change application source from archive.ubuntu.com to mirrors.aliyun.com \
     sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/' /etc/apt/sources.list; \
     fi
-
 # Install dependencies
-RUN apt-get update && apt-get install -y bash openssl curl gcc make && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y bash openssl curl  && rm -rf /var/lib/apt/lists/*
 
 # Create /app directory and set permissions
 RUN mkdir -p /app 
@@ -44,5 +43,3 @@ CMD /app/derper --hostname=$DERP_HOST \
     --certdir=$DERP_CERTS \
     --stun=$DERP_STUN  \
     --verify-clients=$DERP_VERIFY_CLIENTS
-
-                                           
