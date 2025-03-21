@@ -6,6 +6,34 @@ git clone git@github.com:anviod/derip.git
 cd derip
 wget https://gitee.com/anviod/derip/releases/download/2025-03-21/derper
 docker build -t derper:least .
+
+[root@iZwz9555mvg1g78t8d1wvuZ derip]# docker build -t derper:least .
+[+] Building 2.4s (15/15) FINISHED                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                   0.0s
+ => => transferring dockerfile: 1.47kB                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                                                       0.2s
+ => [internal] load .dockerignore                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                        0.0s
+ => [ 1/10] FROM docker.io/library/ubuntu:latest@sha256:626ffe58f6e7566e00254b638eb7e0f3b11d4da9675088f4781a50ae288f3322               0.0s
+ => [internal] load build context                                                                                                      0.1s
+ => => transferring context: 23.95MB                                                                                                   0.1s
+ => CACHED [ 2/10] WORKDIR /app                                                                                                        0.0s
+ => CACHED [ 3/10] RUN if [ "false" = "true" ]; then     sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/' /etc/apt/sources.list;      0.0s
+ => CACHED [ 4/10] RUN apt-get update && apt-get install -y bash openssl curl  && rm -rf /var/lib/apt/lists/*                          0.0s
+ => CACHED [ 5/10] RUN mkdir -p /app                                                                                                   0.0s
+ => CACHED [ 6/10] COPY build_cert.sh /app/                                                                                            0.0s
+ => [ 7/10] COPY ./derper /app/                                                                                                        0.5s
+ => [ 8/10] RUN  chmod +x -R /app                                                                                                      0.5s
+ => [ 9/10] RUN ls -l /app/                                                                                                            0.3s
+ => [10/10] RUN /app/build_cert.sh 127.0.0.1 /app/certs /app/san.conf                                                                  0.4s 
+ => exporting to image                                                                                                                 0.2s 
+ => => exporting layers                                                                                                                0.2s 
+ => => writing image sha256:0d4e2cac665d0c34d5854c9c6acc5a1eaf9fc6a1ed09f91355d593bb2fa4309b                                           0.0s
+ => => naming to docker.io/library/derper:least                                                                                        0.0s
+[root@iZwz9555mvg1g78t8d1wvuZ derip]# docker images
+REPOSITORY                                                         TAG                            IMAGE ID       CREATED          SIZE
+derper                                                             least                          0d4e2cac665d   21 seconds ago   138MB
+derper                                                             v1                             726f9d5188f1   35 minutes ago   130MB
 ```
 
 ### 2 run docker
