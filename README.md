@@ -2,6 +2,9 @@
 ### 1 build docker
 
 ```
+git clone git@github.com:anviod/derip.git
+cd derip
+wget https://gitee.com/anviod/derip/releases/download/2025-03-21/derper
 docker build -t derper:least .
 ```
 
